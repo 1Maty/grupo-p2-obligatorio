@@ -1,6 +1,6 @@
 package uy.edu.um.prog2.adt.BinarySearchTree;
+
 import uy.edu.um.prog2.adt.linkedlist.MyLinkedList;
-import uy.edu.um.prog2.adt.linkedlist.MyList;
 
 
 public class BinarySearchTreeImpl<T extends Comparable<T>,V> implements BinarySearchTree<T,V> {

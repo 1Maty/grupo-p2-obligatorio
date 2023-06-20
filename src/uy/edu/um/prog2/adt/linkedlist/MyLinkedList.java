@@ -2,8 +2,8 @@ package uy.edu.um.prog2.adt.linkedlist;
 
 import uy.edu.um.prog2.adt.Queue.Exceptions.EmptyQueueException;
 import uy.edu.um.prog2.adt.Queue.MyQueue;
-import uy.edu.um.prog2.adt.Stack.MyStack;
 import uy.edu.um.prog2.adt.Stack.Exceptions.EmptyStackException;
+import uy.edu.um.prog2.adt.Stack.MyStack;
 import uy.edu.um.prog2.adt.linkedlist.Exceptions.IlegalIndexException;
 
 public class MyLinkedList<T> implements MyList<T>, MyStack<T>, MyQueue<T> {
