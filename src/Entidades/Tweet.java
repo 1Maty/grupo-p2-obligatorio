@@ -1,18 +1,28 @@
 package Entidades;
 
 public class Tweet {
+    public Usuario getUsuarioTweet() {
+        return usuarioTweet;
+    }
+
+    public void setUsuarioTweet(Usuario usuarioTweet) {
+        this.usuarioTweet = usuarioTweet;
+    }
+
+    private Usuario usuarioTweet;
     private long id;
     private String content;
     private String source;
     private boolean isRetweet;
 
-    public Tweet(long id, String content, String source, boolean isRetweet, String hashtags, String fecha) {
+    public Tweet(long id, String content, String source, boolean isRetweet, String hashtags, String fecha,Usuario usuarioTweet) {
         this.id = id;
         this.content = content;
         this.source = source;
         this.isRetweet = isRetweet;
         this.hashtags = hashtags;
         this.fecha = fecha;
+        this.usuarioTweet = usuarioTweet;
     }
 
     public String getHashtags() {

@@ -1,10 +1,11 @@
 package Tests;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 import uy.edu.um.prog2.adt.Stack.Exceptions.EmptyStackException;
 import uy.edu.um.prog2.adt.Stack.MyStack;
 import uy.edu.um.prog2.adt.linkedlist.MyLinkedList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class MyStackTest {
 

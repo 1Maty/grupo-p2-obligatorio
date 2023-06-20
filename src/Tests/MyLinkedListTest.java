@@ -1,11 +1,10 @@
 package Tests;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 import uy.edu.um.prog2.adt.linkedlist.*;
 import uy.edu.um.prog2.adt.linkedlist.Exceptions.IlegalIndexException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class MyLinkedListTest {
 

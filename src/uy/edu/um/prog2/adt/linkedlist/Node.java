@@ -1,7 +1,5 @@
 package uy.edu.um.prog2.adt.linkedlist;
 
-import java.util.Objects;
-
 public class Node<T> {
     private T value;
 
