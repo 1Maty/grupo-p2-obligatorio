@@ -35,57 +35,48 @@ public class Main {
     }
        }
     public void topPilotosActivos() throws HashLleno {
-        MyHash<String,Integer> contadorPilotos = new MyHashImpl<>(20);
         System.out.print("Ingresa el anio:");
         String anio= input.nextLine();
         System.out.print("Ingresa el mes:");
         String mes = input.nextLine();
         long startTime = System.nanoTime();
-       for(int i =1; i< tweets.length;i++){
-           if(tweets[i]==null) break;
-           if(tweets[i].getFecha().split("-")[0].contains(anio)&&(tweets[i].getFecha().split("-")[1].contains(mes))){
-               String enMinuscula=tweets[i].getContent().toLowerCase();
-               for(int j=0;j< pilotos.length;j++){
-                    String nombrePiloto= pilotos[j].getNombre().split(" ")[0];
-                    String apellidoPiloto= pilotos[j].getNombre().split(" ")[1];
-                    if (pilotos[j].getNombre().split(" ").length>2) apellidoPiloto = apellidoPiloto + " " + pilotos[j].getNombre().split(" ")[2];//por el caso de "Nyck de vryes"
-                   String apellidoPilotoMinuscula=apellidoPiloto.toLowerCase();
-                   String nombrePilotoMinuscula=nombrePiloto.toLowerCase();
-                    if(enMinuscula.contains(apellidoPilotoMinuscula)||enMinuscula.contains(nombrePilotoMinuscula)){
-                        //pilotos[j].setContador(pilotos[j].getContador()+1);
-                        if(contadorPilotos.get(pilotos[j].getNombre())==null) contadorPilotos.add(pilotos[j].getNombre(),1);
-                        else{
-                            contadorPilotos.get(pilotos[j].getNombre()).setValue(contadorPilotos.get(pilotos[j].getNombre()).getValue()+1);
-                        }
-                }}
+        int salteador = 0;
+        Piloto[] arrayPilotos = pilotos;
+       for(Tweet tweetTemp : tweets){
+           if(tweetTemp==null){
+               salteador++;
+               System.out.println("Se salteo "+ salteador+" tweets");
+           }
+           if(tweetTemp!=null) {
+               if(tweetTemp.getFecha().split("-")[0].contains(anio) && (tweetTemp.getFecha().split("-")[1].contains(mes))) {
+                   String enMinuscula = tweetTemp.getContent().toLowerCase();
+                   for (Piloto pilotos : arrayPilotos) {
+                       String nombrePiloto = pilotos.getNombre().split(" ")[0];
+                       String apellidoPiloto = pilotos.getNombre().split(" ")[1];
+                       if (pilotos.getNombre().split(" ").length > 2)
+                           apellidoPiloto = apellidoPiloto + " " + pilotos.getNombre().split(" ")[2];//por el caso de "Nyck de vryes"
+                       String apellidoPilotoMinuscula = apellidoPiloto.toLowerCase();
+                       String nombrePilotoMinuscula = nombrePiloto.toLowerCase();
+                       if (enMinuscula.contains(apellidoPilotoMinuscula) || enMinuscula.contains(nombrePilotoMinuscula)) {
+                           pilotos.setContador(1);
+                       }
+                   }
+               }
            }
        }
-       for(int i=0;i<pilotos.length;i++){
-           pilotos[i].setContador(contadorPilotos.get(pilotos[i].getNombre()).getValue());
+       int low = 0;
+       int high = arrayPilotos.length -1;
+       quicksort(arrayPilotos, low, high);
+       for (int i=0;i<10;i++){
+            System.out.println((i+1)+"Posicion----> "+arrayPilotos[i].getNombre()+"  cantidad: "+arrayPilotos[i].getContador());
        }
-
-        boolean cambiados;
-        for(int i=0;i< pilotos.length-1;i++){
-            cambiados=false;
-            for (int j=0;j< pilotos.length-i-1;j++){
-                int actual=pilotos[j].getContador();
-                int siguiente=pilotos[j+1].getContador();
-                if(actual<siguiente){
-                    Piloto aux = pilotos[j];
-                    pilotos[j] = pilotos[j+1];
-                    pilotos[j+1]=aux;
-                    cambiados=true;
-                }
-            }if(!cambiados)break;}
-        for (int i=0;i<10;i++){
-            System.out.println((i+1)+"Posicion----> "+pilotos[i].getNombre()+"  cantidad: "+pilotos[i].getContador());
-
-        }long endTime = System.nanoTime();
-        double durationInSeconds = (endTime - startTime) / 1_000_000_000.0;
-        System.out.println();
-        double roundedDuration = Math.round(durationInSeconds * 10.0) / 10.0;
-        System.out.println("La función tardó " + roundedDuration + " segundos.");
-        System.out.println();}
+       long endTime = System.nanoTime();
+       double durationInSeconds = (endTime - startTime) / 1_000_000_000.0;
+       System.out.println();
+       double roundedDuration = Math.round(durationInSeconds * 10.0) / 10.0;
+       System.out.println("La función tardó " + roundedDuration + " segundos.");
+       System.out.println();
+   }
     public void cantidadHashtagsParaUnDia() throws IlegalIndexException, HashLleno {
         System.out.print("Ingresa el dia:");
         String dia=input.nextLine();
@@ -101,11 +92,11 @@ public class Main {
                         if(listaHashtags.get(hashes[j])==null){
                             listaHashtags.add(hashes[j],1);
                             cantidadHashtags++;
+                        }
                     }
-                    }
+                }
             }
-
-        }}
+        }
         System.out.println("La cantidad de hashtags en el dia: "+cantidadHashtags);
         long endTime = System.nanoTime();
         double durationInSeconds = (endTime - startTime) / 1_000_000_000.0;
@@ -171,7 +162,7 @@ public class Main {
        for(int i=0;i< nombresUsuarios.size();i++){
            usuariosAOrdenar[i]=usuarios.get(nombresUsuarios.get(i)).getValue();
        }
-       MergeSort(usuariosAOrdenar,"CantidadDeFavoritos");
+       MergeSort(usuariosAOrdenar,"CantidadDeTweets");
        for(int i=0;i<15;i++){
            System.out.println(i+1+"--> "+usuariosAOrdenar[tamanioUsuarios-1-i].getNombreUsuario()+" Cantidad de Tweets: "+usuariosAOrdenar[tamanioUsuarios-1-i].getCantidadTweets()+" Verficado: "+usuariosAOrdenar[tamanioUsuarios-1-i].getVerificado());
        }
@@ -300,8 +291,34 @@ public class Main {
             r++;
         }
     }
+    public static void quicksort(Piloto[] array, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(array, low, high);
+            quicksort(array, low, pivotIndex - 1);
+            quicksort(array, pivotIndex + 1, high);
+        }
+    }
 
+    private static int partition(Piloto[] array, int low, int high) {
+        int pivot = array[high].getContador();
+        int i = low;
 
+        for (int j = low; j < high; j++) {
+            if (array[j].getContador() > pivot) {
+                swap(array, i, j);
+                i++;
+            }
+        }
+
+        swap(array, i, high);
+        return i;
+    }
+
+    private static void swap(Piloto[] array, int i, int j) {
+        Piloto temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
 
     public static void main(String [] args) throws IlegalIndexException, HashLleno {
     Scanner input = new Scanner(System.in);
