@@ -22,6 +22,6 @@ public class Piloto {
     }
 
     public void setContador(int contador) {
-        this.contador = contador;
+        this.contador = this.getContador() +1;
     }
 }
