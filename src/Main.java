@@ -40,13 +40,8 @@ public class Main {
         System.out.print("Ingresa el mes:");
         String mes = input.nextLine();
         long startTime = System.nanoTime();
-        int salteador = 0;
         Piloto[] arrayPilotos = pilotos;
        for(Tweet tweetTemp : tweets){
-           if(tweetTemp==null){
-               salteador++;
-               System.out.println("Se salteo "+ salteador+" tweets");
-           }
            if(tweetTemp!=null) {
                if(tweetTemp.getFecha().split("-")[0].contains(anio) && (tweetTemp.getFecha().split("-")[1].contains(mes))) {
                    String enMinuscula = tweetTemp.getContent().toLowerCase();
@@ -335,10 +330,12 @@ public class Main {
     System.out.print("Opcion:");
     int opcion = input.nextInt();
     if(opcion==0) break;
-    if(opcion==1) prueba.topPilotosActivos();
-    if(opcion==2) prueba.usuariosConMasTweets();
-    if(opcion==5) prueba.top7CuentasConMasFavoritos();
-    if(opcion==6) prueba.cantidadDeTweetsConPalabra();
-    if(opcion==3) prueba.cantidadHashtagsParaUnDia();
-    if(opcion==4) prueba.hashTagMasUsadoEnUnDia();}
-}}
+    if(opcion==1) {prueba.topPilotosActivos();}
+    if(opcion==2) {prueba.usuariosConMasTweets();}
+    if(opcion==5) {prueba.top7CuentasConMasFavoritos();}
+    if(opcion==6) {prueba.cantidadDeTweetsConPalabra();}
+    if(opcion==3) {prueba.cantidadHashtagsParaUnDia();}
+    if(opcion==4) {prueba.hashTagMasUsadoEnUnDia();}
+    }
+   }
+}
